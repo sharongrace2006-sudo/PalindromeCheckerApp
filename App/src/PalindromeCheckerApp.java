@@ -1,37 +1,46 @@
 import java.util.Scanner;
+import java.util.Stack;
 
-public class RecursivePalindromeChecker {
+public class PalindromeChecker {
 
-    // Recursive function
-    public static boolean isPalindrome(String str, int start, int end) {
-
-        // Base condition
-        if (start >= end) {
-            return true;
-        }
-
-        // Compare characters
-        if (str.charAt(start) != str.charAt(end)) {
+    // Encapsulated method to check palindrome
+    public boolean checkPalindrome(String input) {
+        if (input == null) {
             return false;
         }
 
-        // Recursive call
-        return isPalindrome(str, start + 1, end - 1);
+        // Normalize string: lowercase and remove non-alphanumeric
+        String normalized = input.toLowerCase().replaceAll("[^a-z0-9]", "");
+
+        // Use stack to reverse characters
+        Stack<Character> stack = new Stack<>();
+        for (char ch : normalized.toCharArray()) {
+            stack.push(ch);
+        }
+
+        // Compare original and reversed characters
+        for (char ch : normalized.toCharArray()) {
+            if (ch != stack.pop()) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
 
+        PalindromeChecker checker = new PalindromeChecker();
+
         System.out.print("Enter a string: ");
-        String input = scanner.nextLine().toLowerCase();
+        String input = scanner.nextLine();
 
-        boolean result = isPalindrome(input, 0, input.length() - 1);
-
-        if (result) {
-            System.out.println("The string is a Palindrome.");
+        if (checker.checkPalindrome(input)) {
+            System.out.println("The string is a Palindrome (checked via PalindromeChecker class).");
         } else {
-            System.out.println("The string is NOT a Palindrome.");
+            System.out.println("The string is NOT a Palindrome (checked via PalindromeChecker class).");
         }
 
         scanner.close();
