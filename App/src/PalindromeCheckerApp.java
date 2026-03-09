@@ -1,23 +1,29 @@
-public class UseCase2PalindromeCheckerApp {
+import java.util.Scanner;
+
+public class PalindromeChecker {
 
     public static void main(String[] args) {
 
-        // Hardcoded string
-        String word = "madam";
+        Scanner scanner = new Scanner(System.in);
 
-        // Reverse the string
-        String reverse = "";
+        // Taking input from user
+        System.out.print("Enter a string: ");
+        String original = scanner.nextLine();
 
-        for (int i = word.length() - 1; i >= 0; i--) {
-            reverse = reverse + word.charAt(i);
+        String reversed = "";
+
+        // Reverse the string using for loop
+        for (int i = original.length() - 1; i >= 0; i--) {
+            reversed = reversed + original.charAt(i);
         }
 
-        // Check palindrome using if-else
-        if (word.equals(reverse)) {
-            System.out.println(word + " is a Palindrome");
+        // Compare original and reversed strings
+        if (original.equals(reversed)) {
+            System.out.println("The string is a Palindrome.");
         } else {
-            System.out.println(word + " is not a Palindrome");
+            System.out.println("The string is NOT a Palindrome.");
         }
 
+        scanner.close();
     }
 }
