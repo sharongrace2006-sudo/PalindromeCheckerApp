@@ -1,37 +1,42 @@
 import java.util.Scanner;
 import java.util.Stack;
+import java.util.Queue;
+import java.util.LinkedList;
 
-public class PalindromeCheckerUC5 {
+public class PalindromeCheckerUC6 {
 
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
 
-        // Take input from user
         System.out.print("Enter a string: ");
         String input = scanner.nextLine();
 
         Stack<Character> stack = new Stack<>();
+        Queue<Character> queue = new LinkedList<>();
 
-        // Push characters into stack
+        // Insert characters into both Stack and Queue
         for (int i = 0; i < input.length(); i++) {
-            stack.push(input.charAt(i));
+            char ch = input.charAt(i);
+            stack.push(ch);
+            queue.add(ch);
         }
 
         boolean isPalindrome = true;
 
-        // Pop characters and compare
+        // Compare pop and dequeue operations
         for (int i = 0; i < input.length(); i++) {
 
-            char poppedChar = stack.pop();
+            char stackChar = stack.pop();
+            char queueChar = queue.remove();
 
-            if (input.charAt(i) != poppedChar) {
+            if (stackChar != queueChar) {
                 isPalindrome = false;
                 break;
             }
         }
 
-        // Display result
+        // Print result
         if (isPalindrome) {
             System.out.println("The string is a Palindrome.");
         } else {
